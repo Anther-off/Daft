@@ -102,8 +102,10 @@ where
         if nchar == 0 || val.is_empty() {
             ""
         } else {
-            let skip = val.chars().count().saturating_sub(nchar);
-            val.char_indices().nth(skip).map_or(val, |(i, _)| &val[i..])
+            val.char_indices()
+                .rev()
+                .nth(nchar - 1)
+                .map_or(val, |(i, _)| &val[i..])
         }
     }
 
